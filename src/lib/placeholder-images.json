@@ -1,3 +1,40 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "cement-plant",
+      "description": "An aerial view of a large cement manufacturing plant.",
+      "imageUrl": "https://picsum.photos/seed/cement-plant/1200/400",
+      "imageHint": "cement plant"
+    },
+    {
+      "id": "raw-materials",
+      "description": "A pile of raw materials like limestone and clay for cement production.",
+      "imageUrl": "https://picsum.photos/seed/raw-materials/600/400",
+      "imageHint": "raw materials"
+    },
+    {
+      "id": "clinker",
+      "description": "Close-up of cement clinker nodules.",
+      "imageUrl": "https://picsum.photos/seed/clinker/600/400",
+      "imageHint": "cement clinker"
+    },
+    {
+      "id": "quality-control",
+      "description": "A laboratory setting for cement quality testing.",
+      "imageUrl": "https://picsum.photos/seed/quality-control/600/400",
+      "imageHint": "laboratory test"
+    },
+    {
+      "id": "alternative-fuel",
+      "description": "Bales of processed waste used as alternative fuel.",
+      "imageUrl": "https://picsum.photos/seed/alternative-fuel/600/400",
+      "imageHint": "alternative fuel"
+    },
+    {
+      "id": "logistics",
+      "description": "Trucks and conveyor belts handling materials at a plant.",
+      "imageUrl": "https://picsum.photos/seed/logistics/600/400",
+      "imageHint": "industrial logistics"
+    }
+  ]
 }
