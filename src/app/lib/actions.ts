@@ -14,13 +14,9 @@ export type ActionState = {
 };
 
 export async function runCementPlantGpt(prevState: ActionState, formData: FormData): Promise<ActionState> {
-  const kiln_temperature = formData.get('kiln_temperature');
-  const cooler_pressure = formData.get('cooler_pressure');
-  const raw_mill_power = formData.get('raw_mill_power');
-
-  const plantData = JSON.stringify({ kiln_temperature, cooler_pressure, raw_mill_power });
-  const historicalData = JSON.stringify({ "avg_kiln_temp_last_30d": 1450, "avg_clinker_c3s_last_90d": 65 });
-  const kpiData = JSON.stringify({ "target_power_consumption": "90 kWh/ton", "current_power_consumption": "95 kWh/ton" });
+  const plantData = formData.get('plantData') as string;
+  const historicalData = formData.get('historicalData') as string;
+  const kpiData = formData.get('kpiData') as string;
   
   try {
     const result = await cementPlantGpt({
@@ -36,15 +32,9 @@ export async function runCementPlantGpt(prevState: ActionState, formData: FormDa
 }
 
 export async function runRawMaterialOptimization(prevState: ActionState, formData: FormData): Promise<ActionState> {
-  const limestone_purity = formData.get('limestone_purity');
-  const clay_moisture = formData.get('clay_moisture');
-  const silica_content = formData.get('silica_content');
-  const iron_ore = formData.get('iron_ore');
-  const bauxite = formData.get('bauxite');
-  
-  const feedData = JSON.stringify({ limestone_purity, clay_moisture, silica_content });
-  const currentBlend = JSON.stringify({ limestone: 70, clay: 20, iron_ore, bauxite });
-  const historicalData = 'Previous blends with high limestone content led to increased energy consumption during grinding.';
+  const feedData = formData.get('feedData') as string;
+  const currentBlend = formData.get('currentBlend') as string;
+  const historicalData = formData.get('historicalData') as string;
 
   if (!feedData || !currentBlend || !historicalData) {
     return { message: 'All fields are required.', error: true };
