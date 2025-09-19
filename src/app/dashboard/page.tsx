@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 
 export default function DashboardPage() {
   const [state, formAction] = useActionState<ActionState, FormData>(runCementPlantGpt, { message: '' });
@@ -40,16 +40,16 @@ export default function DashboardPage() {
             </CardHeader>
             <CardContent className="grid gap-4">
                  <div className="space-y-2">
-                  <Label htmlFor="plantData">Real-time Plant Data</Label>
-                  <Textarea id="plantData" name="plantData" rows={5} defaultValue='{ "kiln_temperature": 1455, "cooler_pressure": 5.2, "raw_mill_power": 3500 }' />
+                  <Label htmlFor="kiln_temperature">Kiln Temperature (°C)</Label>
+                  <Input id="kiln_temperature" name="kiln_temperature" type="number" defaultValue="1455" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="historicalData">Historical Data</Label>
-                  <Textarea id="historicalData" name="historicalData" rows={5} defaultValue='{ "avg_kiln_temp_last_30d": 1450, "avg_clinker_c3s_last_90d": 65 }' />
+                  <Label htmlFor="cooler_pressure">Cooler Pressure (bar)</Label>
+                  <Input id="cooler_pressure" name="cooler_pressure" type="number" step="0.1" defaultValue="5.2" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="kpiData">KPI Data</Label>
-                  <Textarea id="kpiData" name="kpiData" rows={5} defaultValue='{ "target_power_consumption": "90 kWh/ton", "current_power_consumption": "95 kWh/ton" }' />
+                  <Label htmlFor="raw_mill_power">Raw Mill Power (kW)</Label>
+                  <Input id="raw_mill_power" name="raw_mill_power" type="number" defaultValue="3500" />
                 </div>
             </CardContent>
           </Card>
