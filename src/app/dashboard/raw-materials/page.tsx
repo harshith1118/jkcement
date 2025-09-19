@@ -1,5 +1,5 @@
 'use client';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import { useEffect } from 'react';
 import { runRawMaterialOptimization, type ActionState } from '@/app/lib/actions';
 import { PageHeader } from '@/components/dashboard/page-header';
@@ -23,7 +23,7 @@ const chartConfig = {
 };
 
 export default function RawMaterialsPage() {
-  const [state, formAction] = useFormState<ActionState, FormData>(runRawMaterialOptimization, { message: '' });
+  const [state, formAction] = useActionState<ActionState, FormData>(runRawMaterialOptimization, { message: '' });
   const { toast } = useToast();
 
   useEffect(() => {

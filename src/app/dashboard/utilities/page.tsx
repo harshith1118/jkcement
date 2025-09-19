@@ -1,5 +1,5 @@
 'use client';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import { useEffect } from 'react';
 import { runUtilitiesOptimization, type ActionState } from '@/app/lib/actions';
 import { PageHeader } from '@/components/dashboard/page-header';
@@ -17,7 +17,7 @@ const MOCK_INPUT = {
 };
 
 export default function UtilitiesPage() {
-  const [state, formAction] = useFormState<ActionState, FormData>(runUtilitiesOptimization, { message: '' });
+  const [state, formAction] = useActionState<ActionState, FormData>(runUtilitiesOptimization, { message: '' });
   const { toast } = useToast();
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 'use client';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import { useEffect } from 'react';
 import { runCementPlantGpt, type ActionState } from '@/app/lib/actions';
 import { PageHeader } from '@/components/dashboard/page-header';
@@ -25,7 +25,7 @@ const chartConfig = {
 };
 
 export default function DashboardPage() {
-  const [state, formAction] = useFormState<ActionState, FormData>(runCementPlantGpt, { message: '' });
+  const [state, formAction] = useActionState<ActionState, FormData>(runCementPlantGpt, { message: '' });
   const { toast } = useToast();
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 'use client';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import { useEffect } from 'react';
 import { runQualityCorrections, type ActionState } from '@/app/lib/actions';
 import { PageHeader } from '@/components/dashboard/page-header';
@@ -18,7 +18,7 @@ const MOCK_INPUT = {
 };
 
 export default function QualityPage() {
-  const [state, formAction] = useFormState<ActionState, FormData>(runQualityCorrections, { message: '' });
+  const [state, formAction] = useActionState<ActionState, FormData>(runQualityCorrections, { message: '' });
   const { toast } = useToast();
 
   useEffect(() => {

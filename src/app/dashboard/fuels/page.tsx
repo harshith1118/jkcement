@@ -1,5 +1,5 @@
 'use client';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react';
 import { useEffect } from 'react';
 import { runFuelMaximization, type ActionState } from '@/app/lib/actions';
 import { PageHeader } from '@/components/dashboard/page-header';
@@ -19,7 +19,7 @@ const MOCK_INPUT = {
 };
 
 export default function FuelsPage() {
-  const [state, formAction] = useFormState<ActionState, FormData>(runFuelMaximization, { message: '' });
+  const [state, formAction] = useActionState<ActionState, FormData>(runFuelMaximization, { message: '' });
   const { toast } = useToast();
 
   useEffect(() => {
