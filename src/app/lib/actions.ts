@@ -13,27 +13,12 @@ export type ActionState = {
   error?: boolean;
 };
 
-// Mock data for AI flows
-const MOCK_DATA = {
-    plantData: JSON.stringify({ "timestamp": "2024-08-15T14:30:00Z", "kiln_temp": 1450, "cooler_pressure": 5.2, "raw_mill_power": 3200, "cement_mill_power": 4100, "clinker_production_rate": 250 }, null, 2),
-    historicalData: "Historical data shows a 5% increase in energy consumption during summer months due to higher ambient temperatures affecting cooler efficiency.",
-    kpiData: JSON.stringify({ "energy_consumption_kwh_per_ton": 95, "clinker_quality_c3s": "65%", "production_rate_tph": 250, "alternative_fuel_substitution_rate": "15%" }, null, 2),
-    currentBlend: JSON.stringify({ "limestone": "78%", "clay": "18%", "iron_ore": "3%", "bauxite": "1%" }, null, 2),
-    plantConditions: "Kiln running at 98% capacity. Weather is clear, 32°C.",
-    feedData: "Real-time feed analysis: LSF=98.5, SM=2.4, AM=1.5. Moisture content at 0.8%.",
-    qualityTargets: JSON.stringify({ "target_c3s": "66%", "target_liteness": "90" }, null, 2),
-    plantParameters: "Plant capacity: 3.0 MTPA. Current fuel: 80% coal, 20% petcoke. AF options: RDF, biomass, tires.",
-    environmentalRegulations: "Target CO2 emission: &lt; 0.8 tCO2/t clinker. NOx limits: 400 mg/Nm3.",
-    costConstraints: "Coal cost: $100/ton. Petcoke cost: $120/ton. RDF cost: $30/ton.",
-    plantName: "JK Cement - Mangrol Plant"
-};
-
 export async function runCementPlantGpt(prevState: ActionState, formData: FormData): Promise<ActionState> {
   try {
     const result = await cementPlantGpt({
-      plantData: MOCK_DATA.plantData,
-      historicalData: MOCK_DATA.historicalData,
-      kpiData: MOCK_DATA.kpiData,
+      plantData: "Real-time sensor data from the cement plant.",
+      historicalData: "Historical data for the past 10 years.",
+      kpiData: "Key performance indicators data.",
     });
     return { message: 'Report generated successfully.', data: result };
   } catch (e) {
@@ -123,7 +108,7 @@ export async function runUtilitiesOptimization(prevState: ActionState, formData:
 
     try {
         const result = await optimizeUtilitiesAndMaterialHandling({
-            plantName: MOCK_DATA.plantName,
+            plantName: 'JK Cement - Mangrol Plant',
             historicalData,
             currentConditions,
         });

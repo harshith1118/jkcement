@@ -12,12 +12,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { DollarSign, Droplets, Zap } from 'lucide-react';
 
-const MOCK_INPUT = {
-    plantParameters: "Plant capacity: 3.0 MTPA. Current fuel: 80% coal, 20% petcoke. Available alternative fuels: RDF (Calorific Value: 3500 kcal/kg), biomass (CV: 3000 kcal/kg), shredded tires (CV: 7000 kcal/kg).",
-    environmentalRegulations: "Target CO2 emission: &lt; 0.8 tCO2/t clinker. NOx limits: 400 mg/Nm3. Local regulations on chlorine content in RDF.",
-    costConstraints: "Coal cost: $100/ton. Petcoke cost: $120/ton. RDF cost: $30/ton (including handling). Biomass is carbon-neutral.",
-};
-
 export default function FuelsPage() {
   const [state, formAction] = useActionState<ActionState, FormData>(runFuelMaximization, { message: '' });
   const { toast } = useToast();
@@ -42,15 +36,15 @@ export default function FuelsPage() {
         <form action={formAction} className="space-y-4 lg:col-span-2">
           <div className="space-y-2">
             <Label htmlFor="plantParameters">Plant &amp; Fuel Parameters</Label>
-            <Textarea id="plantParameters" name="plantParameters" rows={5} defaultValue={MOCK_INPUT.plantParameters} />
+            <Textarea id="plantParameters" name="plantParameters" rows={5} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="environmentalRegulations">Environmental Regulations</Label>
-            <Textarea id="environmentalRegulations" name="environmentalRegulations" rows={4} defaultValue={MOCK_INPUT.environmentalRegulations} />
+            <Textarea id="environmentalRegulations" name="environmentalRegulations" rows={4} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="costConstraints">Cost Constraints</Label>
-            <Textarea id="costConstraints" name="costConstraints" rows={4} defaultValue={MOCK_INPUT.costConstraints} />
+            <Textarea id="costConstraints" name="costConstraints" rows={4} />
           </div>
           <SubmitButton>Optimize Fuel Mix</SubmitButton>
         </form>

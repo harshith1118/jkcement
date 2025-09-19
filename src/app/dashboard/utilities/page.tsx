@@ -11,11 +11,6 @@ import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { DollarSign, Truck, Zap } from 'lucide-react';
 
-const MOCK_INPUT = {
-    historicalData: "Compressed air system shows a 15% pressure drop during peak hours. Conveyor belt #3 motor power consumption increased by 10% in the last quarter. Yard logistics show an average truck waiting time of 25 minutes.",
-    currentConditions: "Currently operating at 90% capacity. Two out of three cement mills are running. High demand for PPC cement is impacting dispatch schedule.",
-};
-
 export default function UtilitiesPage() {
   const [state, formAction] = useActionState<ActionState, FormData>(runUtilitiesOptimization, { message: '' });
   const { toast } = useToast();
@@ -40,11 +35,11 @@ export default function UtilitiesPage() {
         <form action={formAction} className="space-y-4 lg:col-span-2">
           <div className="space-y-2">
             <Label htmlFor="historicalData">Historical Utilities &amp; Logistics Data</Label>
-            <Textarea id="historicalData" name="historicalData" rows={6} defaultValue={MOCK_INPUT.historicalData} />
+            <Textarea id="historicalData" name="historicalData" rows={6} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="currentConditions">Current Operational Conditions</Label>
-            <Textarea id="currentConditions" name="currentConditions" rows={5} defaultValue={MOCK_INPUT.currentConditions} />
+            <Textarea id="currentConditions" name="currentConditions" rows={5} />
           </div>
           <SubmitButton>Optimize Utilities &amp; Handling</SubmitButton>
         </form>

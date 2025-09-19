@@ -11,12 +11,6 @@ import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { CheckCircle2, FlaskConical, GitBranch } from 'lucide-react';
 
-const MOCK_INPUT = {
-    feedData: "Real-time feed analysis: LSF=99.2, SM=2.3, AM=1.6. Kiln feed moisture is fluctuating between 0.7% and 1.1%.",
-    historicalData: "Past incidents show that LSF above 99.0 correlates with lower 28-day strength in cement. Feed moisture swings have caused unstable kiln operations.",
-    qualityTargets: JSON.stringify({ "target_c3s": "66%", "target_liteness": "90", "28-day_strength_Mpa": "53" }, null, 2),
-};
-
 export default function QualityPage() {
   const [state, formAction] = useActionState<ActionState, FormData>(runQualityCorrections, { message: '' });
   const { toast } = useToast();
@@ -41,15 +35,15 @@ export default function QualityPage() {
         <form action={formAction} className="space-y-4 lg:col-span-2">
           <div className="space-y-2">
             <Label htmlFor="feedData">Real-time Feed Data</Label>
-            <Textarea id="feedData" name="feedData" rows={5} defaultValue={MOCK_INPUT.feedData} />
+            <Textarea id="feedData" name="feedData" rows={5} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="historicalData">Historical Quality Data</Label>
-            <Textarea id="historicalData" name="historicalData" rows={5} defaultValue={MOCK_INPUT.historicalData} />
+            <Textarea id="historicalData" name="historicalData" rows={5} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="qualityTargets">Product Quality Targets</Label>
-            <Textarea id="qualityTargets" name="qualityTargets" rows={4} defaultValue={MOCK_INPUT.qualityTargets} />
+            <Textarea id="qualityTargets" name="qualityTargets" rows={4} />
           </div>
           <SubmitButton>Analyze and Suggest Corrections</SubmitButton>
         </form>

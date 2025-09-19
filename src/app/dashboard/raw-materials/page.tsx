@@ -12,12 +12,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 
-const MOCK_INPUT = {
-    feedData: "Real-time feed analysis: LSF=98.5, SM=2.4, AM=1.5. Moisture content at 0.8%.",
-    currentBlend: JSON.stringify({ "limestone": "78%", "clay": "18%", "iron_ore": "3%", "bauxite": "1%" }, null, 2),
-    historicalData: "Historical data shows clinker C3S content drops when LSF exceeds 99.0. High clay moisture content has previously led to mill blockages.",
-};
-
 const chartConfig = {
   value: { label: 'Value', color: 'hsl(var(--chart-1))' },
 };
@@ -48,15 +42,15 @@ export default function RawMaterialsPage() {
         <form action={formAction} className="space-y-4 lg:col-span-2">
           <div className="space-y-2">
             <Label htmlFor="feedData">Real-time Feed Data</Label>
-            <Textarea id="feedData" name="feedData" rows={4} defaultValue={MOCK_INPUT.feedData} />
+            <Textarea id="feedData" name="feedData" rows={4} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="currentBlend">Current Raw Material Blend</Label>
-            <Textarea id="currentBlend" name="currentBlend" rows={5} defaultValue={MOCK_INPUT.currentBlend} />
+            <Textarea id="currentBlend" name="currentBlend" rows={5} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="historicalData">Historical Performance Data</Label>
-            <Textarea id="historicalData" name="historicalData" rows={4} defaultValue={MOCK_INPUT.historicalData} />
+            <Textarea id="historicalData" name="historicalData" rows={4} />
           </div>
           <SubmitButton>Optimize Blend</SubmitButton>
         </form>

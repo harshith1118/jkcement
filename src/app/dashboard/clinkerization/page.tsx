@@ -11,11 +11,6 @@ import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Gauge, Leaf, Zap } from 'lucide-react';
 
-const MOCK_INPUT = {
-    realTimeData: "Kiln Amps: 250A, Kiln Speed: 3.5 RPM, Fuel Flow: 12 tph, O2: 2.1%, NOx: 450 mg/Nm3",
-    plantConditions: "Clinker production target is 250 tph. Ambient temperature is high at 35°C, affecting cooler fan efficiency.",
-};
-
 export default function ClinkerizationPage() {
   const [state, formAction] = useActionState<ActionState, FormData>(runClinkerizationBalancing, { message: '' });
   const { toast } = useToast();
@@ -40,11 +35,11 @@ export default function ClinkerizationPage() {
         <form action={formAction} className="space-y-4 lg:col-span-2">
           <div className="space-y-2">
             <Label htmlFor="realTimeData">Real-time Clinkerization Data</Label>
-            <Textarea id="realTimeData" name="realTimeData" rows={5} defaultValue={MOCK_INPUT.realTimeData} />
+            <Textarea id="realTimeData" name="realTimeData" rows={5} />
           </div>
           <div className="space-y-2">
             <Label htmlFor="plantConditions">Current Plant Conditions</Label>
-            <Textarea id="plantConditions" name="plantConditions" rows={5} defaultValue={MOCK_INPUT.plantConditions} />
+            <Textarea id="plantConditions" name="plantConditions" rows={5} />
           </div>
           <SubmitButton>Optimize Combustion</SubmitButton>
         </form>
