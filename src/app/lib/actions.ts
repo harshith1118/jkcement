@@ -14,18 +14,13 @@ export type ActionState = {
 };
 
 export async function runCementPlantGpt(prevState: ActionState, formData: FormData): Promise<ActionState> {
-  const kilnTemperature = formData.get('kilnTemperature') as string;
-  const coolerPressure = formData.get('coolerPressure') as string;
-  const rawMillPower = formData.get('rawMillPower') as string;
+  const plantData = formData.get('plantData') as string;
+  const historicalData = formData.get('historicalData') as string;
+  const kpiData = formData.get('kpiData') as string;
 
-  const plantData = JSON.stringify({
-    kiln_temperature: parseFloat(kilnTemperature) || 0,
-    cooler_pressure: parseFloat(coolerPressure) || 0,
-    raw_mill_power: parseFloat(rawMillPower) || 0,
-  });
-
-  const historicalData = '{ "avg_kiln_temp_last_30d": 1450, "avg_clinker_c3s_last_90d": 65 }';
-  const kpiData = '{ "target_power_consumption": "90 kWh/ton", "current_power_consumption": "95 kWh/ton" }';
+  if (!plantData || !historicalData || !kpiData) {
+    return { message: 'All fields are required.', error: true };
+  }
 
   try {
     const result = await cementPlantGpt({
