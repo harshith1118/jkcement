@@ -10,6 +10,8 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Line, LineChart } from 'recharts';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 
 const chartData = [
   { month: 'January', desktop: 186, mobile: 80 },
@@ -45,7 +47,21 @@ export default function DashboardPage() {
         description="Autonomous plant operations and cross-process optimization at your fingertips."
       />
       <div className="space-y-8">
-        <form action={formAction}>
+        <form action={formAction} className="space-y-4 lg:col-span-2">
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="space-y-2">
+              <Label htmlFor="plantData">Real-time Plant Data</Label>
+              <Textarea id="plantData" name="plantData" rows={5} />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="historicalData">Historical Data</Label>
+              <Textarea id="historicalData" name="historicalData" rows={5} />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="kpiData">KPI Data</Label>
+              <Textarea id="kpiData" name="kpiData" rows={5} />
+            </div>
+          </div>
           <SubmitButton>Generate AI Report</SubmitButton>
         </form>
 

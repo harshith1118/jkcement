@@ -14,11 +14,19 @@ export type ActionState = {
 };
 
 export async function runCementPlantGpt(prevState: ActionState, formData: FormData): Promise<ActionState> {
+  const plantData = formData.get('plantData') as string;
+  const historicalData = formData.get('historicalData') as string;
+  const kpiData = formData.get('kpiData') as string;
+
+  if (!plantData || !historicalData || !kpiData) {
+    return { message: 'All fields are required.', error: true };
+  }
+  
   try {
     const result = await cementPlantGpt({
-      plantData: "Real-time sensor data from the cement plant.",
-      historicalData: "Historical data for the past 10 years.",
-      kpiData: "Key performance indicators data.",
+      plantData,
+      historicalData,
+      kpiData,
     });
     return { message: 'Report generated successfully.', data: result };
   } catch (e) {
