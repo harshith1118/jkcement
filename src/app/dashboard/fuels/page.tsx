@@ -35,7 +35,7 @@ export default function FuelsPage() {
       <div className="grid gap-8 lg:grid-cols-5">
         <form action={formAction} className="space-y-4 lg:col-span-2">
           <div className="space-y-2">
-            <Label htmlFor="plantParameters">Plant &amp; Fuel Parameters</Label>
+            <Label htmlFor="plantParameters">Plant & Fuel Parameters</Label>
             <Textarea id="plantParameters" name="plantParameters" rows={5} />
           </div>
           <div className="space-y-2">
