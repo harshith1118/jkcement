@@ -5,12 +5,12 @@ import { runRawMaterialOptimization, type ActionState } from '@/app/lib/actions'
 import { PageHeader } from '@/components/dashboard/page-header';
 import { SubmitButton } from '@/components/submit-button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 
 const chartConfig = {
   value: { label: 'Value', color: 'hsl(var(--chart-1))' },
@@ -40,19 +40,35 @@ export default function RawMaterialsPage() {
       />
       <div className="grid gap-8 lg:grid-cols-5">
         <form action={formAction} className="space-y-4 lg:col-span-2">
-          <div className="space-y-2">
-            <Label htmlFor="feedData">Real-time Feed Data</Label>
-            <Textarea id="feedData" name="feedData" rows={4} defaultValue='{"limestone_purity": 88, "clay_moisture": 15, "silica_content": 92}'/>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="currentBlend">Current Raw Material Blend</Label>
-            <Textarea id="currentBlend" name="currentBlend" rows={5} defaultValue='{"limestone": 70, "clay": 20, "iron_ore": 5, "bauxite": 5}'/>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="historicalData">Historical Performance Data</Label>
-            <Textarea id="historicalData" name="historicalData" rows={4} defaultValue='Previous blends with high limestone content led to increased energy consumption during grinding.'/>
-          </div>
-          <SubmitButton>Optimize Blend</SubmitButton>
+            <Card>
+                <CardHeader>
+                    <CardTitle>Current Raw Material Blend</CardTitle>
+                    <CardDescription>Enter the percentages for each component.</CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="limestone">Limestone (%)</Label>
+                            <Input id="limestone" name="limestone" type="number" defaultValue="70" />
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="clay">Clay (%)</Label>
+                            <Input id="clay" name="clay" type="number" defaultValue="20" />
+                        </div>
+                    </div>
+                     <div className="grid grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="iron_ore">Iron Ore (%)</Label>
+                            <Input id="iron_ore" name="iron_ore" type="number" defaultValue="5" />
+                        </div>
+                        <div className="space-y-2">
+                            <Label htmlFor="bauxite">Bauxite (%)</Label>
+                            <Input id="bauxite" name="bauxite" type="number" defaultValue="5" />
+                        </div>
+                    </div>
+                </CardContent>
+            </Card>
+            <SubmitButton>Optimize Blend</SubmitButton>
         </form>
 
         <div className="lg:col-span-3">

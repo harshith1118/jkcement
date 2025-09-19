@@ -1,20 +1,24 @@
 'use client';
-import { useActionState } from 'react';
-import { useEffect } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import { runFuelMaximization, type ActionState } from '@/app/lib/actions';
 import { PageHeader } from '@/components/dashboard/page-header';
 import { SubmitButton } from '@/components/submit-button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { DollarSign, Droplets, Zap } from 'lucide-react';
+import { Slider } from '@/components/ui/slider';
 
 export default function FuelsPage() {
   const [state, formAction] = useActionState<ActionState, FormData>(runFuelMaximization, { message: '' });
   const { toast } = useToast();
+
+  const [fossilFuel, setFossilFuel] = useState(70);
+  const [tires, setTires] = useState(15);
+  const [biomass, setBiomass] = useState(10);
+  const [industrialWaste, setIndustrialWaste] = useState(5);
 
   useEffect(() => {
     if (state.message && !state.data) {
@@ -26,6 +30,10 @@ export default function FuelsPage() {
     }
   }, [state, toast]);
 
+  const handleSliderChange = (setter: React.Dispatch<React.SetStateAction<number>>) => ([value]: number[]) => {
+    setter(value);
+  }
+
   return (
     <>
       <PageHeader
@@ -34,18 +42,30 @@ export default function FuelsPage() {
       />
       <div className="grid gap-8 lg:grid-cols-5">
         <form action={formAction} className="space-y-4 lg:col-span-2">
-          <div className="space-y-2">
-            <Label htmlFor="plantParameters">Plant & Fuel Parameters</Label>
-            <Textarea id="plantParameters" name="plantParameters" rows={5} defaultValue='Current fossil fuel: 100% petcoke. Available alternative fuels: tires, biomass, industrial waste.'/>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="environmentalRegulations">Environmental Regulations</Label>
-            <Textarea id="environmentalRegulations" name="environmentalRegulations" rows={4} defaultValue='NOx emissions must be below 500 mg/Nm3. CO2 reduction target of 15%.'/>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="costConstraints">Cost Constraints</Label>
-            <Textarea id="costConstraints" name="costConstraints" rows={4} defaultValue='Alternative fuels must be at least 20% cheaper than petcoke on a per-GJ basis.'/>
-          </div>
+            <Card>
+                <CardHeader>
+                    <CardTitle>Fuel Mix Composition</CardTitle>
+                    <CardDescription>Adjust the sliders to set the fuel mixture. The total must be 100%.</CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="fossilFuelPercentage">Petcoke ({fossilFuel}%)</Label>
+                        <Slider name="fossilFuelPercentage" defaultValue={[fossilFuel]} max={100} step={1} onValueChange={handleSliderChange(setFossilFuel)} />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="tiresPercentage">Tires ({tires}%)</Label>
+                        <Slider name="tiresPercentage" defaultValue={[tires]} max={100} step={1} onValueChange={handleSliderChange(setTires)} />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="biomassPercentage">Biomass ({biomass}%)</Label>
+                        <Slider name="biomassPercentage" defaultValue={[biomass]} max={100} step={1} onValueChange={handleSliderChange(setBiomass)} />
+                    </div>
+                     <div className="space-y-2">
+                        <Label htmlFor="industrialWastePercentage">Industrial Waste ({industrialWaste}%)</Label>
+                        <Slider name="industrialWastePercentage" defaultValue={[industrialWaste]} max={100} step={1} onValueChange={handleSliderChange(setIndustrialWaste)} />
+                    </div>
+                </CardContent>
+            </Card>
           <SubmitButton>Optimize Fuel Mix</SubmitButton>
         </form>
 

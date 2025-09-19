@@ -5,11 +5,11 @@ import { runQualityCorrections, type ActionState } from '@/app/lib/actions';
 import { PageHeader } from '@/components/dashboard/page-header';
 import { SubmitButton } from '@/components/submit-button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
-import { CheckCircle2, FlaskConical, GitBranch } from 'lucide-react';
+import { CheckCircle2, FlaskConical } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 
 export default function QualityPage() {
   const [state, formAction] = useActionState<ActionState, FormData>(runQualityCorrections, { message: '' });
@@ -33,18 +33,26 @@ export default function QualityPage() {
       />
       <div className="grid gap-8 lg:grid-cols-5">
         <form action={formAction} className="space-y-4 lg:col-span-2">
-          <div className="space-y-2">
-            <Label htmlFor="feedData">Real-time Feed Data</Label>
-            <Textarea id="feedData" name="feedData" rows={5} defaultValue='{"raw_meal_lsf": 98, "silica_modulus": 2.6, "alumina_modulus": 1.5}' />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="historicalData">Historical Quality Data</Label>
-            <Textarea id="historicalData" name="historicalData" rows={5} defaultValue='Past data shows LSF values above 100 lead to decreased 28-day strength.' />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="qualityTargets">Product Quality Targets</Label>
-            <Textarea id="qualityTargets" name="qualityTargets" rows={4} defaultValue='{"c3s": "65-70%", "c2s": "10-15%", "28d_strength": "> 50 MPa"}' />
-          </div>
+            <Card>
+                <CardHeader>
+                    <CardTitle>Real-time Feed Data</CardTitle>
+                    <CardDescription>Enter the current quality parameters.</CardDescription>
+                </CardHeader>
+                <CardContent className="grid gap-4">
+                    <div className="space-y-2">
+                        <Label htmlFor="raw_meal_lsf">Raw Meal LSF</Label>
+                        <Input id="raw_meal_lsf" name="raw_meal_lsf" type="number" defaultValue="98" />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="silica_modulus">Silica Modulus</Label>
+                        <Input id="silica_modulus" name="silica_modulus" type="number" step="0.1" defaultValue="2.6" />
+                    </div>
+                    <div className="space-y-2">
+                        <Label htmlFor="alumina_modulus">Alumina Modulus</Label>
+                        <Input id="alumina_modulus" name="alumina_modulus" type="number" step="0.1" defaultValue="1.5" />
+                    </div>
+                </CardContent>
+            </Card>
           <SubmitButton>Analyze and Suggest Corrections</SubmitButton>
         </form>
 

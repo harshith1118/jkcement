@@ -14,10 +14,19 @@ export type ActionState = {
 };
 
 export async function runCementPlantGpt(prevState: ActionState, formData: FormData): Promise<ActionState> {
-  const plantData = formData.get('plantData') as string;
-  const historicalData = formData.get('historicalData') as string;
-  const kpiData = formData.get('kpiData') as string;
-  
+  const kilnTemperature = formData.get('kilnTemperature') as string;
+  const coolerPressure = formData.get('coolerPressure') as string;
+  const rawMillPower = formData.get('rawMillPower') as string;
+
+  const plantData = JSON.stringify({
+    kiln_temperature: parseFloat(kilnTemperature) || 0,
+    cooler_pressure: parseFloat(coolerPressure) || 0,
+    raw_mill_power: parseFloat(rawMillPower) || 0,
+  });
+
+  const historicalData = '{ "avg_kiln_temp_last_30d": 1450, "avg_clinker_c3s_last_90d": 65 }';
+  const kpiData = '{ "target_power_consumption": "90 kWh/ton", "current_power_consumption": "95 kWh/ton" }';
+
   try {
     const result = await cementPlantGpt({
       plantData,
@@ -32,16 +41,28 @@ export async function runCementPlantGpt(prevState: ActionState, formData: FormDa
 }
 
 export async function runRawMaterialOptimization(prevState: ActionState, formData: FormData): Promise<ActionState> {
-  const feedData = formData.get('feedData') as string;
-  const currentBlend = formData.get('currentBlend') as string;
-  const historicalData = formData.get('historicalData') as string;
+  const limestone = formData.get('limestone') as string;
+  const clay = formData.get('clay') as string;
+  const ironOre = formData.get('iron_ore') as string;
+  const bauxite = formData.get('bauxite') as string;
 
-  if (!feedData || !currentBlend || !historicalData) {
+  if (!limestone || !clay || !ironOre || !bauxite) {
     return { message: 'All fields are required.', error: true };
   }
+  
+  const currentBlend = JSON.stringify({
+      limestone: parseFloat(limestone) || 0,
+      clay: parseFloat(clay) || 0,
+      iron_ore: parseFloat(ironOre) || 0,
+      bauxite: parseFloat(bauxite) || 0,
+  });
 
   try {
-    const result = await optimizeRawMaterialBlends({ feedData, currentBlend, historicalData });
+    const result = await optimizeRawMaterialBlends({ 
+        feedData: '{"limestone_purity": 88, "clay_moisture": 15, "silica_content": 92}',
+        currentBlend: currentBlend,
+        historicalData: 'Previous blends with high limestone content led to increased energy consumption during grinding.' 
+    });
     return { message: 'Optimization successful.', data: result };
   } catch (e) {
     console.error(e);
@@ -50,15 +71,25 @@ export async function runRawMaterialOptimization(prevState: ActionState, formDat
 }
 
 export async function runClinkerizationBalancing(prevState: ActionState, formData: FormData): Promise<ActionState> {
-  const realTimeData = formData.get('realTimeData') as string;
-  const plantConditions = formData.get('plantConditions') as string;
+  const preheaterTemp = formData.get('preheater_temp') as string;
+  const kilnSpeed = formData.get('kiln_speed') as string;
+  const fuelFlowRate = formData.get('fuel_flow_rate') as string;
 
-  if (!realTimeData || !plantConditions) {
+  if (!preheaterTemp || !kilnSpeed || !fuelFlowRate) {
     return { message: 'All fields are required.', error: true };
   }
+
+  const realTimeData = JSON.stringify({
+    preheater_temp: parseFloat(preheaterTemp) || 0,
+    kiln_speed: parseFloat(kilnSpeed) || 0,
+    fuel_flow_rate: parseFloat(fuelFlowRate) || 0
+  });
   
   try {
-    const result = await optimizeCombustionProcess({ realTimeData, plantConditions });
+    const result = await optimizeCombustionProcess({ 
+        realTimeData, 
+        plantConditions: 'Stable operation, clinker quality targets are being met.' 
+    });
     return { message: 'Optimization successful.', data: result };
   } catch (e) {
     console.error(e);
@@ -67,16 +98,26 @@ export async function runClinkerizationBalancing(prevState: ActionState, formDat
 }
 
 export async function runQualityCorrections(prevState: ActionState, formData: FormData): Promise<ActionState> {
-    const feedData = formData.get('feedData') as string;
-    const historicalData = formData.get('historicalData') as string;
-    const qualityTargets = formData.get('qualityTargets') as string;
+    const rawMealLsf = formData.get('raw_meal_lsf') as string;
+    const silicaModulus = formData.get('silica_modulus') as string;
+    const aluminaModulus = formData.get('alumina_modulus') as string;
 
-    if (!feedData || !historicalData || !qualityTargets) {
+    if (!rawMealLsf || !silicaModulus || !aluminaModulus) {
         return { message: 'All fields are required.', error: true };
     }
 
+    const feedData = JSON.stringify({
+        raw_meal_lsf: parseFloat(rawMealLsf) || 0,
+        silica_modulus: parseFloat(silicaModulus) || 0,
+        alumina_modulus: parseFloat(aluminaModulus) || 0
+    });
+
     try {
-        const result = await proactiveQualityCorrections({ feedData, historicalData, qualityTargets });
+        const result = await proactiveQualityCorrections({ 
+            feedData, 
+            historicalData: 'Past data shows LSF values above 100 lead to decreased 28-day strength.', 
+            qualityTargets: '{"c3s": "65-70%", "c2s": "10-15%", "28d_strength": "> 50 MPa"}'
+        });
         return { message: 'Analysis complete.', data: result };
     } catch (e) {
         console.error(e);
@@ -85,16 +126,23 @@ export async function runQualityCorrections(prevState: ActionState, formData: Fo
 }
 
 export async function runFuelMaximization(prevState: ActionState, formData: FormData): Promise<ActionState> {
-    const plantParameters = formData.get('plantParameters') as string;
-    const environmentalRegulations = formData.get('environmentalRegulations') as string;
-    const costConstraints = formData.get('costConstraints') as string;
+    const fossilFuelPercentage = formData.get('fossilFuelPercentage') as string;
+    const tiresPercentage = formData.get('tiresPercentage') as string;
+    const biomassPercentage = formData.get('biomassPercentage') as string;
+    const industrialWastePercentage = formData.get('industrialWastePercentage') as string;
 
-    if (!plantParameters || !environmentalRegulations || !costConstraints) {
+    if (!fossilFuelPercentage || !tiresPercentage || !biomassPercentage || !industrialWastePercentage) {
         return { message: 'All fields are required.', error: true };
     }
 
+    const plantParameters = `Current fuel mix: ${fossilFuelPercentage}% Petcoke, ${tiresPercentage}% Tires, ${biomassPercentage}% Biomass, ${industrialWastePercentage}% Industrial Waste.`;
+
     try {
-        const result = await optimizeAlternativeFuelUsage({ plantParameters, environmentalRegulations, costConstraints });
+        const result = await optimizeAlternativeFuelUsage({ 
+            plantParameters, 
+            environmentalRegulations: 'NOx emissions must be below 500 mg/Nm3. CO2 reduction target of 15%.', 
+            costConstraints: 'Alternative fuels must be at least 20% cheaper than petcoke on a per-GJ basis.' 
+        });
         return { message: 'Optimization successful.', data: result };
     } catch (e) {
         console.error(e);

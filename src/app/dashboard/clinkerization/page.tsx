@@ -5,11 +5,11 @@ import { runClinkerizationBalancing, type ActionState } from '@/app/lib/actions'
 import { PageHeader } from '@/components/dashboard/page-header';
 import { SubmitButton } from '@/components/submit-button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Gauge, Leaf, Zap } from 'lucide-react';
+import { Input } from '@/components/ui/input';
 
 export default function ClinkerizationPage() {
   const [state, formAction] = useActionState<ActionState, FormData>(runClinkerizationBalancing, { message: '' });
@@ -33,14 +33,26 @@ export default function ClinkerizationPage() {
       />
       <div className="grid gap-8 lg:grid-cols-5">
         <form action={formAction} className="space-y-4 lg:col-span-2">
-          <div className="space-y-2">
-            <Label htmlFor="realTimeData">Real-time Clinkerization Data</Label>
-            <Textarea id="realTimeData" name="realTimeData" rows={5} defaultValue='{"preheater_temp": 900, "kiln_speed": 4.5, "fuel_flow_rate": 12}' />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="plantConditions">Current Plant Conditions</Label>
-            <Textarea id="plantConditions" name="plantConditions" rows={5} defaultValue='Stable operation, clinker quality targets are being met.'/>
-          </div>
+          <Card>
+            <CardHeader>
+                <CardTitle>Real-time Clinkerization Data</CardTitle>
+                <CardDescription>Enter the current operational parameters.</CardDescription>
+            </CardHeader>
+            <CardContent className="grid gap-4">
+                <div className="space-y-2">
+                    <Label htmlFor="preheater_temp">Preheater Temp (°C)</Label>
+                    <Input id="preheater_temp" name="preheater_temp" type="number" defaultValue="900" />
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="kiln_speed">Kiln Speed (rpm)</Label>
+                    <Input id="kiln_speed" name="kiln_speed" type="number" step="0.1" defaultValue="4.5" />
+                </div>
+                <div className="space-y-2">
+                    <Label htmlFor="fuel_flow_rate">Fuel Flow Rate (ton/hr)</Label>
+                    <Input id="fuel_flow_rate" name="fuel_flow_rate" type="number" defaultValue="12" />
+                </div>
+            </CardContent>
+          </Card>
           <SubmitButton>Optimize Combustion</SubmitButton>
         </form>
 
