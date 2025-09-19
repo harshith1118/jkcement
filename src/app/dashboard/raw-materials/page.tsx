@@ -42,15 +42,15 @@ export default function RawMaterialsPage() {
         <form action={formAction} className="space-y-4 lg:col-span-2">
           <div className="space-y-2">
             <Label htmlFor="feedData">Real-time Feed Data</Label>
-            <Textarea id="feedData" name="feedData" rows={4} />
+            <Textarea id="feedData" name="feedData" rows={4} defaultValue='{"limestone_purity": 88, "clay_moisture": 15, "silica_content": 92}'/>
           </div>
           <div className="space-y-2">
             <Label htmlFor="currentBlend">Current Raw Material Blend</Label>
-            <Textarea id="currentBlend" name="currentBlend" rows={5} />
+            <Textarea id="currentBlend" name="currentBlend" rows={5} defaultValue='{"limestone": 70, "clay": 20, "iron_ore": 5, "bauxite": 5}'/>
           </div>
           <div className="space-y-2">
             <Label htmlFor="historicalData">Historical Performance Data</Label>
-            <Textarea id="historicalData" name="historicalData" rows={4} />
+            <Textarea id="historicalData" name="historicalData" rows={4} defaultValue='Previous blends with high limestone content led to increased energy consumption during grinding.'/>
           </div>
           <SubmitButton>Optimize Blend</SubmitButton>
         </form>
