@@ -35,15 +35,15 @@ export default function QualityPage() {
         <form action={formAction} className="space-y-4 lg:col-span-2">
           <div className="space-y-2">
             <Label htmlFor="feedData">Real-time Feed Data</Label>
-            <Textarea id="feedData" name="feedData" rows={5} />
+            <Textarea id="feedData" name="feedData" rows={5} defaultValue='{"raw_meal_lsf": 98, "silica_modulus": 2.6, "alumina_modulus": 1.5}' />
           </div>
           <div className="space-y-2">
             <Label htmlFor="historicalData">Historical Quality Data</Label>
-            <Textarea id="historicalData" name="historicalData" rows={5} />
+            <Textarea id="historicalData" name="historicalData" rows={5} defaultValue='Past data shows LSF values above 100 lead to decreased 28-day strength.' />
           </div>
           <div className="space-y-2">
             <Label htmlFor="qualityTargets">Product Quality Targets</Label>
-            <Textarea id="qualityTargets" name="qualityTargets" rows={4} />
+            <Textarea id="qualityTargets" name="qualityTargets" rows={4} defaultValue='{"c3s": "65-70%", "c2s": "10-15%", "28d_strength": "> 50 MPa"}' />
           </div>
           <SubmitButton>Analyze and Suggest Corrections</SubmitButton>
         </form>

@@ -36,15 +36,15 @@ export default function FuelsPage() {
         <form action={formAction} className="space-y-4 lg:col-span-2">
           <div className="space-y-2">
             <Label htmlFor="plantParameters">Plant & Fuel Parameters</Label>
-            <Textarea id="plantParameters" name="plantParameters" rows={5} />
+            <Textarea id="plantParameters" name="plantParameters" rows={5} defaultValue='Current fossil fuel: 100% petcoke. Available alternative fuels: tires, biomass, industrial waste.'/>
           </div>
           <div className="space-y-2">
             <Label htmlFor="environmentalRegulations">Environmental Regulations</Label>
-            <Textarea id="environmentalRegulations" name="environmentalRegulations" rows={4} />
+            <Textarea id="environmentalRegulations" name="environmentalRegulations" rows={4} defaultValue='NOx emissions must be below 500 mg/Nm3. CO2 reduction target of 15%.'/>
           </div>
           <div className="space-y-2">
             <Label htmlFor="costConstraints">Cost Constraints</Label>
-            <Textarea id="costConstraints" name="costConstraints" rows={4} />
+            <Textarea id="costConstraints" name="costConstraints" rows={4} defaultValue='Alternative fuels must be at least 20% cheaper than petcoke on a per-GJ basis.'/>
           </div>
           <SubmitButton>Optimize Fuel Mix</SubmitButton>
         </form>
@@ -98,6 +98,7 @@ export default function FuelsPage() {
                                 </CardHeader>
                                 <CardContent>
                                      <p className="text-xs text-muted-foreground">{state.data.costAnalysis}</p>
+
                                 </CardContent>
                             </Card>
                         </div>

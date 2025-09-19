@@ -35,11 +35,11 @@ export default function ClinkerizationPage() {
         <form action={formAction} className="space-y-4 lg:col-span-2">
           <div className="space-y-2">
             <Label htmlFor="realTimeData">Real-time Clinkerization Data</Label>
-            <Textarea id="realTimeData" name="realTimeData" rows={5} />
+            <Textarea id="realTimeData" name="realTimeData" rows={5} defaultValue='{"preheater_temp": 900, "kiln_speed": 4.5, "fuel_flow_rate": 12}' />
           </div>
           <div className="space-y-2">
             <Label htmlFor="plantConditions">Current Plant Conditions</Label>
-            <Textarea id="plantConditions" name="plantConditions" rows={5} />
+            <Textarea id="plantConditions" name="plantConditions" rows={5} defaultValue='Stable operation, clinker quality targets are being met.'/>
           </div>
           <SubmitButton>Optimize Combustion</SubmitButton>
         </form>

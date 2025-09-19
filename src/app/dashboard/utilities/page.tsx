@@ -35,11 +35,11 @@ export default function UtilitiesPage() {
         <form action={formAction} className="space-y-4 lg:col-span-2">
           <div className="space-y-2">
             <Label htmlFor="historicalData">Historical Utilities &amp; Logistics Data</Label>
-            <Textarea id="historicalData" name="historicalData" rows={6} />
+            <Textarea id="historicalData" name="historicalData" rows={6} defaultValue='Compressed air system shows significant pressure drops during peak hours. Conveyor belts for raw material transport are running at constant speed regardless of load.' />
           </div>
           <div className="space-y-2">
             <Label htmlFor="currentConditions">Current Operational Conditions</Label>
-            <Textarea id="currentConditions" name="currentConditions" rows={5} />
+            <Textarea id="currentConditions" name="currentConditions" rows={5} defaultValue='High-demand production period. Two out of three raw mills are in operation. All finishing mills are active.'/>
           </div>
           <SubmitButton>Optimize Utilities &amp; Handling</SubmitButton>
         </form>
