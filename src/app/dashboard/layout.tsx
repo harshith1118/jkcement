@@ -11,7 +11,6 @@ import {
   Settings,
   ShieldCheck,
   Truck,
-  User,
 } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
@@ -80,7 +79,7 @@ export default function DashboardLayout({
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="h-12 w-full justify-start gap-2 px-2 group-data-[collapsible=icon]:size-12 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:justify-center">
                  <Avatar className="h-8 w-8">
-                  <AvatarImage src="https://picsum.photos/seed/user/100/100" />
+                  <AvatarImage src="https://picsum.photos/seed/user/100/100" data-ai-hint="male profile" />
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 <div className="text-left group-data-[collapsible=icon]:hidden">
