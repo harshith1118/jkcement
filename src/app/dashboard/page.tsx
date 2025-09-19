@@ -51,21 +51,21 @@ export default function DashboardPage() {
           <div className="grid gap-4 md:grid-cols-3">
             <div className="space-y-2">
               <Label htmlFor="plantData">Real-time Plant Data</Label>
-              <Textarea id="plantData" name="plantData" rows={5} />
+              <Textarea id="plantData" name="plantData" rows={5} defaultValue='{ "kiln_temperature": 1455, "cooler_pressure": 5.2, "raw_mill_power": 3500 }' />
             </div>
             <div className="space-y-2">
               <Label htmlFor="historicalData">Historical Data</Label>
-              <Textarea id="historicalData" name="historicalData" rows={5} />
+              <Textarea id="historicalData" name="historicalData" rows={5} defaultValue='{ "avg_kiln_temp_last_30d": 1450, "avg_clinker_c3s_last_90d": 65 }' />
             </div>
             <div className="space-y-2">
               <Label htmlFor="kpiData">KPI Data</Label>
-              <Textarea id="kpiData" name="kpiData" rows={5} />
+              <Textarea id="kpiData" name="kpiData" rows={5} defaultValue='{ "target_power_consumption": "90 kWh/ton", "current_power_consumption": "95 kWh/ton" }' />
             </div>
           </div>
           <SubmitButton>Generate AI Report</SubmitButton>
         </form>
 
-        {state.data && (
+        {state.data ? (
           <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-3">
             <Card>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -92,6 +92,39 @@ export default function DashboardPage() {
               </CardHeader>
               <CardContent>
                  <p className="text-sm text-muted-foreground">{state.data.recommendations}</p>
+              </CardContent>
+            </Card>
+          </div>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-3">
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">AI Summary</CardTitle>
+                <BotMessageSquare className="h-4 w-4 text-muted-foreground" />
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <Skeleton className="h-4 w-4/5" />
+                <Skeleton className="h-4 w-full" />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">Anomalies Detected</CardTitle>
+                <AlertCircle className="h-4 w-4 text-destructive" />
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-3/4" />
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">AI Recommendations</CardTitle>
+                <Lightbulb className="h-4 w-4 text-yellow-500" />
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-full" />
               </CardContent>
             </Card>
           </div>
