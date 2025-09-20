@@ -49,7 +49,14 @@ const prompt = ai.definePrompt({
   Real-time Feed Data: {{{feedData}}}
   Current Blend: {{{currentBlend}}}
   Historical Data: {{{historicalData}}}
-  \n`,
+  
+  Output should be structured as follows:
+  optimizedBlend: A JSON object with the optimized blend percentages for each material (limestone, clay, iron_ore, bauxite). Example: {"limestone": 68.5, "clay": 21.0, "iron_ore": 5.5, "bauxite": 5.0}
+  predictedEnergySavings: The predicted energy savings from using the optimized blend, in kWh.
+  predictedQualityImprovement: A description of the predicted improvement in product quality from using the optimized blend.
+  reasoning: The AI's reasoning for the recommended blend.
+  
+  Ensure that the optimizedBlend percentages sum to 100.`,
 });
 
 const optimizeRawMaterialBlendsFlow = ai.defineFlow(

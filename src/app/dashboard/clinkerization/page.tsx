@@ -10,6 +10,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Gauge, Leaf, Zap } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { ClinkerizationIntroduction } from '@/components/clinkerization-introduction';
 
 export default function ClinkerizationPage() {
   const [state, formAction] = useActionState<ActionState, FormData>(runClinkerizationBalancing, { message: '' });
@@ -31,6 +32,7 @@ export default function ClinkerizationPage() {
         title="Clinkerization Parameter Balancing"
         description="Continuously monitor high-temperature operations, adjusting controls to lower energy demand while reducing environmental impact."
       />
+      <ClinkerizationIntroduction />
       <div className="grid gap-8 lg:grid-cols-5">
         <form action={formAction} className="space-y-4 lg:col-span-2">
           <Card>

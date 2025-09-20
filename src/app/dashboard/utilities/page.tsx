@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { DollarSign, Truck, Zap } from 'lucide-react';
+import { UtilitiesIntroduction } from '@/components/utilities-introduction';
 
 export default function UtilitiesPage() {
   const [state, formAction] = useActionState<ActionState, FormData>(runUtilitiesOptimization, { message: '' });
@@ -31,6 +32,7 @@ export default function UtilitiesPage() {
         title="Plant Utilities &amp; Material Handling"
         description="Predict and minimize energy consumption in utilities and optimize internal logistics flows."
       />
+      <UtilitiesIntroduction />
       <div className="grid gap-8 lg:grid-cols-5">
         <form action={formAction} className="space-y-4 lg:col-span-2">
           <div className="space-y-2">

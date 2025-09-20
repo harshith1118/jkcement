@@ -11,6 +11,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { RawMaterialsIntroduction } from '@/components/raw-materials-introduction';
 
 const chartConfig = {
   value: { label: 'Value', color: 'hsl(var(--chart-1))' },
@@ -30,7 +31,19 @@ export default function RawMaterialsPage() {
     }
   }, [state, toast]);
 
-  const optimizedBlendData = state.data?.optimizedBlend ? Object.entries(JSON.parse(state.data.optimizedBlend)).map(([name, value]) => ({ name, value: parseFloat(String(value)) })) : [];
+  const optimizedBlendData = state.data?.optimizedBlend ? 
+  (() => {
+    try {
+      return Object.entries(JSON.parse(state.data.optimizedBlend)).map(([name, value]) => ({ 
+        name, 
+        value: parseFloat(String(value)) 
+      }));
+    } catch (e) {
+      console.error('Failed to parse optimizedBlend:', e);
+      return [];
+    }
+  })() : 
+  [];
 
   return (
     <>
@@ -38,6 +51,7 @@ export default function RawMaterialsPage() {
         title="Raw Material & Grinding Optimization"
         description="Ingest real-time feed data to predict variability, fine-tune grinding efficiency, and minimize energy losses."
       />
+      <RawMaterialsIntroduction />
       <div className="grid gap-8 lg:grid-cols-5">
         <form action={formAction} className="space-y-4 lg:col-span-2">
             <Card>

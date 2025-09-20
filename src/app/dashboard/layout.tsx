@@ -79,12 +79,12 @@ export default function DashboardLayout({
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" className="h-12 w-full justify-start gap-2 px-2 group-data-[collapsible=icon]:size-12 group-data-[collapsible=icon]:p-0 group-data-[collapsible=icon]:justify-center">
                  <Avatar className="h-8 w-8">
-                  <AvatarImage src="https://picsum.photos/seed/user/100/100" data-ai-hint="male profile" />
-                  <AvatarFallback>JD</AvatarFallback>
+                  <AvatarImage src="https://placehold.co/100x100/3b82f6/ffffff?text=SP" />
+                  <AvatarFallback>SP</AvatarFallback>
                 </Avatar>
                 <div className="text-left group-data-[collapsible=icon]:hidden">
-                  <p className="font-medium text-sm">John Doe</p>
-                  <p className="text-xs text-muted-foreground">Supervisor</p>
+                  <p className="font-medium text-sm">Site Supervisor</p>
+                  <p className="text-xs text-muted-foreground">Operations Manager</p>
                 </div>
               </Button>
             </DropdownMenuTrigger>
@@ -105,10 +105,6 @@ export default function DashboardLayout({
           <div className="flex-1">
              <h1 className="text-lg font-semibold">JK Cement</h1>
           </div>
-           <Button variant="ghost" size="icon">
-              <Settings className="h-5 w-5" />
-              <span className="sr-only">Settings</span>
-            </Button>
         </header>
         <main className="flex-1 p-4 md:p-8">{children}</main>
       </SidebarInset>

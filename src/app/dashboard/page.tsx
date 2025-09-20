@@ -10,6 +10,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { AIIntroduction } from '@/components/ai-introduction';
 
 export default function DashboardPage() {
   const [state, formAction] = useActionState<ActionState, FormData>(runCementPlantGpt, { message: '' });
@@ -31,6 +32,7 @@ export default function DashboardPage() {
         title="AI-Powered Dashboard"
         description="Autonomous plant operations and cross-process optimization at your fingertips."
       />
+      <AIIntroduction />
       <div className="grid gap-8 lg:grid-cols-5">
         <form action={formAction} className="space-y-4 lg:col-span-2">
            <Card>

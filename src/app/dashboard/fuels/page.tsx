@@ -10,6 +10,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Badge } from '@/components/ui/badge';
 import { DollarSign, Droplets, Zap } from 'lucide-react';
 import { Slider } from '@/components/ui/slider';
+import { FuelsIntroduction } from '@/components/fuels-introduction';
 
 export default function FuelsPage() {
   const [state, formAction] = useActionState<ActionState, FormData>(runFuelMaximization, { message: '' });
@@ -40,6 +41,7 @@ export default function FuelsPage() {
         title="Alternative Fuel Maximization"
         description="Model diverse fuel combinations, optimize thermal substitution rates, and reduce reliance on fossil fuels."
       />
+      <FuelsIntroduction />
       <div className="grid gap-8 lg:grid-cols-5">
         <form action={formAction} className="space-y-4 lg:col-span-2">
             <Card>
@@ -51,18 +53,22 @@ export default function FuelsPage() {
                     <div className="space-y-2">
                         <Label htmlFor="fossilFuelPercentage">Petcoke ({fossilFuel}%)</Label>
                         <Slider name="fossilFuelPercentage" defaultValue={[fossilFuel]} max={100} step={1} onValueChange={handleSliderChange(setFossilFuel)} />
+                        <input type="hidden" name="fossilFuelPercentage" value={fossilFuel} />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="tiresPercentage">Tires ({tires}%)</Label>
                         <Slider name="tiresPercentage" defaultValue={[tires]} max={100} step={1} onValueChange={handleSliderChange(setTires)} />
+                        <input type="hidden" name="tiresPercentage" value={tires} />
                     </div>
                     <div className="space-y-2">
                         <Label htmlFor="biomassPercentage">Biomass ({biomass}%)</Label>
                         <Slider name="biomassPercentage" defaultValue={[biomass]} max={100} step={1} onValueChange={handleSliderChange(setBiomass)} />
+                        <input type="hidden" name="biomassPercentage" value={biomass} />
                     </div>
                      <div className="space-y-2">
                         <Label htmlFor="industrialWastePercentage">Industrial Waste ({industrialWaste}%)</Label>
                         <Slider name="industrialWastePercentage" defaultValue={[industrialWaste]} max={100} step={1} onValueChange={handleSliderChange(setIndustrialWaste)} />
+                        <input type="hidden" name="industrialWastePercentage" value={industrialWaste} />
                     </div>
                 </CardContent>
             </Card>

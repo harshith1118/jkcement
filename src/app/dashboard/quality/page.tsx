@@ -10,6 +10,7 @@ import { useToast } from '@/hooks/use-toast';
 import { Skeleton } from '@/components/ui/skeleton';
 import { CheckCircle2, FlaskConical } from 'lucide-react';
 import { Input } from '@/components/ui/input';
+import { QualityIntroduction } from '@/components/quality-introduction';
 
 export default function QualityPage() {
   const [state, formAction] = useActionState<ActionState, FormData>(runQualityCorrections, { message: '' });
@@ -31,6 +32,7 @@ export default function QualityPage() {
         title="Quality Consistency Assurance"
         description="Use Generative AI to detect fluctuations in inputs and provide proactive quality corrections."
       />
+      <QualityIntroduction />
       <div className="grid gap-8 lg:grid-cols-5">
         <form action={formAction} className="space-y-4 lg:col-span-2">
             <Card>
