@@ -45,4 +45,4 @@ CementAI is an AI-powered dashboard application designed to optimize cement plan
 - ESLint, Prettier
 - Turbopack for fast builds
 
-## Project Structure
+
